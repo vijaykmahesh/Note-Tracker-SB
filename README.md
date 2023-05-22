@@ -1,2 +1,2 @@
 # Note-Tracker-SB
-Note Tracker Application Using Spring Booy
+Note Tracker Application Using Spring Boot

@@ -3,13 +3,13 @@ package com.seleniumexpress.notetracker.customannotation;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class DescriptionValidation implements ConstraintValidator<ValidDescrption, String> {
+public class DescriptionValidation implements ConstraintValidator<NotMoreThen400Characters, String> {
 
 	private int min;
 
 	private int max;
 	
-	public void initialize(ValidDescrption desc) {
+	public void initialize(NotMoreThen400Characters desc) {
 
 		// i can write post construct work right here i,e we will do intialization part
 		// here

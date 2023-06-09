@@ -14,13 +14,13 @@ import jakarta.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = DescriptionValidation.class)
 
-public @interface ValidDescrption {
+public @interface NotMoreThen400Characters {
 
 	int min() default 18;
 
-	int max() default 60;
+	int max() default 400;
 
-	String message() default "Desc must be between 18-60";
+	String message() default "Desc must be between 18-400";
 
 	Class<?>[] groups() default {};
 

@@ -23,7 +23,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/myapp/note-home">Create Note</a>
         </li>
-       
+        <li class="nav-item">
+          <a class="nav-link" href="/myapp/blog-home">Create Blog</a>
+        </li>
        
       </ul>
       <span class="navbar-text">

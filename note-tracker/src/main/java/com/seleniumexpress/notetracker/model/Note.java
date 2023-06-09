@@ -1,6 +1,6 @@
 package com.seleniumexpress.notetracker.model;
 
-import com.seleniumexpress.notetracker.customannotation.ValidDescrption;
+import com.seleniumexpress.notetracker.customannotation.NotMoreThen400Characters;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -17,7 +17,7 @@ public class Note {
 	@Size(min = 3,max = 100, message = "Note char's should be between 3-15")
 	private String note;
 	
-	@ValidDescrption(min = 10,max = 15,message = "Desc should be within 10-15 chars ")
+	@NotMoreThen400Characters(min = 10,max = 400,message = "Desc should be within 10-400 chars ")
 	private String desc;
 	private int id;
 

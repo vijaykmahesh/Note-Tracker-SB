@@ -65,6 +65,9 @@ public class NoteTrackerController {
 		return "note-home-page";
 	}
 	
+	//@GetMapping("/blog")
+	
+	
 
 	@PostMapping(value = "/submit-form")
 	public String processNote(@Valid @ModelAttribute("noteObj") Note note,BindingResult errors,RedirectAttributes redirectAttributes) {

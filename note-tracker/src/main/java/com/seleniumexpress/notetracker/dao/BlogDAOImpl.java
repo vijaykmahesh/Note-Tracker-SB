@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.seleniumexpress.notetracker.entity.BlogEntity;
+import com.seleniumexpress.notetracker.entity.NoteEntity;
+import com.seleniumexpress.notetracker.model.Blog;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,6 +45,16 @@ public class BlogDAOImpl implements BlogDAO {
 
 		return blogEntityList;
 
+	}
+
+	@Override
+	public BlogEntity findBlogById(int id) {
+		
+		String sql = "SELECT id,blogTitle,subject,writtenBy,socialMediaLink,content,date FROM notetracker.blog where id = ?";
+		
+		BlogEntity blogEntity = jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<BlogEntity>(BlogEntity.class), id);
+		
+		return blogEntity;
 	}
 
 }

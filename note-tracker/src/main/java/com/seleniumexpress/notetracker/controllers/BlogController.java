@@ -1,5 +1,6 @@
 package com.seleniumexpress.notetracker.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.seleniumexpress.notetracker.model.Blog;
 import com.seleniumexpress.notetracker.service.BlogService;
+import com.seleniumexpress.notetracker.utils.DateUtils;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -79,6 +82,20 @@ public class BlogController {
 		model.addAttribute("blogsList", blogsList);
 		
 		return "my-blogs";
+	}
+	
+	@GetMapping("/getBlogById")
+	public String getBlogById(Model model, @RequestParam("id") int id) {
+		
+		Blog blog = blogService.findBlogById(id);
+		
+		Date blogDate = DateUtils.asDate(blog.getDate());
+		
+		model.addAttribute("blog", blog);
+		model.addAttribute("blogDate", blogDate);
+		
+		
+		return "blog-view";
 	}
 
 }

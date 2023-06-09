@@ -1,5 +1,6 @@
 package com.seleniumexpress.notetracker.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class BlogEntity {
@@ -14,7 +15,7 @@ public class BlogEntity {
 
 	private String content;
 
-	private Date date;
+	private LocalDate date;
 
 	private int id;
 
@@ -23,7 +24,7 @@ public class BlogEntity {
 	}
 
 	public BlogEntity(String blogTitle, String subject, String writtenBy, String socialMediaLink, String content,
-			Date date, int id) {
+			LocalDate date, int id) {
 		super();
 		this.blogTitle = blogTitle;
 		this.subject = subject;
@@ -74,11 +75,11 @@ public class BlogEntity {
 		this.content = content;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

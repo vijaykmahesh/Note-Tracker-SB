@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.seleniumexpress.notetracker.customannotation.TodaysDate;
+
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -33,8 +35,8 @@ public class Blog {
 	private String content;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@FutureOrPresent(message = "please enter present date only")
-	private Date date;
+	@TodaysDate(message = "please enter present date only")
+	private LocalDate date;
 
 	private int id;
 

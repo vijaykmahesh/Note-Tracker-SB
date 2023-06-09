@@ -10,6 +10,6 @@ public interface BlogService {
 
 	public List<Blog> findAll();
 
-	public Blog findNoteById(int id);
+	public Blog findBlogById(int id);
 
 }

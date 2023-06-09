@@ -10,4 +10,6 @@ public interface BlogDAO {
 
 	public List<BlogEntity> findAll();
 
+	public BlogEntity findBlogById(int id);
+
 }

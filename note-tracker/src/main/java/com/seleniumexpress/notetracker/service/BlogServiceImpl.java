@@ -47,9 +47,16 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public Blog findNoteById(int id) {
+	public Blog findBlogById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		BlogEntity blogEntity = blogDAO.findBlogById(id);
+		
+		Blog blog = new Blog();
+		
+		BeanUtils.copyProperties(blogEntity, blog);
+		
+		return blog;
 	}
 
 }

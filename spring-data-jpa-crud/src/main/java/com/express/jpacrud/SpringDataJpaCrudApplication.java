@@ -22,6 +22,25 @@ public class SpringDataJpaCrudApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+		//updateBook();
+		
+		deleteBook();
+	}
+
+	public void deleteBook() {
+		
+		Book book = new Book();
+		
+		book.setBookName("teams");
+		book.setAuthor("sri");
+		
+		Book returnedBook = repo.save(book); // persist()
+		
+		repo.delete(returnedBook);
+		
+	}
+	public void updateBook() {
+		
 		Book book = new Book();
 		
 		book.setBookName("bhagvatgitha");

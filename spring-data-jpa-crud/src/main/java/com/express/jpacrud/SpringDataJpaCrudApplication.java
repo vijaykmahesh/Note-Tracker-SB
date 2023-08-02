@@ -22,9 +22,9 @@ public class SpringDataJpaCrudApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		//updateBook();
+		updateBook();
 		
-		deleteBook();
+		//deleteBook();
 	}
 
 	public void deleteBook() {
@@ -43,14 +43,25 @@ public class SpringDataJpaCrudApplication implements CommandLineRunner {
 		
 		Book book = new Book();
 		
-		book.setBookName("bhagvatgitha");
-		book.setAuthor("seetha");
+		book.setBookName("2 states");
+		book.setAuthor("param");
 		
 		Book returnedBook = repo.save(book); // persist()
 		
-		returnedBook.setBookName("bhagvatgitha 2.0");
+		returnedBook.setBookName("2 states 2.0");
 		
-		repo.save(returnedBook); // merge()
+		System.out.println("book" +book.hashCode()+ "returnedBook" +returnedBook.hashCode());
+		
+		Book updatedBook = repo.save(returnedBook); // merge()
+		
+		updatedBook.setBookName("2 states 3.0");
+		
+		System.out.println("updatedBook" +updatedBook.hashCode()+ "returnedBook" +returnedBook.hashCode());
+		repo.save(updatedBook);
+		
+		
+		
+		
 	}
 
 }

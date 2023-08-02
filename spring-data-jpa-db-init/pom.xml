@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.1</version>
+		<version>3.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.express</groupId>
-	<artifactId>Spring-data-jpa-01</artifactId>
+	<groupId>com.express.jpacrud</groupId>
+	<artifactId>spring-data-jpa-crud</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Spring-data-jpa-01</name>
-	<description>Data-Jpa</description>
+	<name>spring-data-jpa-crud</name>
+	<description>data jpa 01</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

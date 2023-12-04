@@ -28,9 +28,6 @@
         </li>
        
       </ul>
-      <span class="navbar-text">
-         <a class="nav-link" href="/myapp/logout">logout</a>
-      </span>
     </div>
   </div>
 </nav>

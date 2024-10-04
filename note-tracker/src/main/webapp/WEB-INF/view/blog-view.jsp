@@ -15,21 +15,7 @@
 
 	<div class="container">
 		
-		<h2 class="text-center">${blog.blogTitle}</h2>
-		<h4 class="text-center">${blog.subject}</h4>
-		
-		<hr />
-		
-		<div class="row">
-		<div class="col-6"><h1>Author : ${blog.writtenBy}</h1></div>
-		<div class="col-6"><h1>${blogDate}</h1></div>
-		</div>
-		<br/>
-		<br/>
-		
-		
-		<p class="h2">${blog.content}</p>
-		
+		<h2 class="text-center">${message}</h2>
 		
 	</div>
 

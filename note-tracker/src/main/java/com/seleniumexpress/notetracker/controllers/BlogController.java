@@ -1,100 +1,58 @@
 package com.seleniumexpress.notetracker.controllers;
 
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.seleniumexpress.notetracker.model.Blog;
-import com.seleniumexpress.notetracker.service.BlogService;
-import com.seleniumexpress.notetracker.utils.DateUtils;
 
-import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Controller
 public class BlogController {
 
-	@Autowired
-	private BlogService blogService;
+	public static final String BROKER_ADDRESS = "tcp://broker.emqx.io:1883";
 
-	@GetMapping(value = "/blog-home")
-	public String showBlogPage(Model model) {
+	@GetMapping("/dashboard")
+	public String getUserDetails(Model model) throws MqttException, InterruptedException {
 
-		if (!model.containsAttribute("blogObj")) {
+		MqttClient mqttClient = new MqttClient(BROKER_ADDRESS, MqttClient.generateClientId());
 
-			model.addAttribute("blogObj", new Blog());
+		MqttConnectOptions options = new MqttConnectOptions();
+		options.setCleanSession(false);
 
-		}
+		mqttClient.connect(options);
 
-		log.info("Application name : ");
+		mqttClient.subscribe("my/dynamic/topics/ecr", 0);
 
-		return "blog";
-	}
+		mqttClient.setCallback(new MqttCallback() {
 
-	@PostMapping(value = "/submit-blog")
-	public String processBlog(@Valid @ModelAttribute("blogObj") Blog blog, BindingResult errors,
-			RedirectAttributes redirectAttributes) {
+			@Override
+			public void messageArrived(String topic, MqttMessage message) throws Exception {
+				// TODO Auto-generated method stub
 
-		if (errors.hasErrors()) {
+				model.addAttribute("message", message);
 
-			redirectAttributes.addFlashAttribute("blogObj", blog);
-			redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.blogObj", errors);
-			errors.getAllErrors().forEach(error -> log.info("error triggered -> {}", error));
+				System.out.println("received TID" + topic + "message is " + message);
 
-			return "redirect:/blog-home";
-		}
+			}
 
-		//insert or update
-				if (blog.getId() == 0) {
-					log.info("perfoming insert opration");
-					
-					//insert
-					blogService.save(blog);
-				} else {
-					
-					log.info("perfoming update");
-					
-					//update
-					//blogService.updateNote(note);
-					
-				}
-				
-				redirectAttributes.addFlashAttribute("blogObj", blog);
+			@Override
+			public void deliveryComplete(IMqttDeliveryToken token) {
+				// TODO Auto-generated method stub
 
-		return "redirect:/blog-list";
-	}
-	
-	@GetMapping("/blog-list")
-	public String blogList(Model model) {
-		
-		List<Blog> blogsList = blogService.findAll();
-		
-		model.addAttribute("blogsList", blogsList);
-		
-		return "my-blogs";
-	}
-	
-	@GetMapping("/getBlogById")
-	public String getBlogById(Model model, @RequestParam("id") int id) {
-		
-		Blog blog = blogService.findBlogById(id);
-		
-		Date blogDate = DateUtils.asDate(blog.getDate());
-		
-		model.addAttribute("blog", blog);
-		model.addAttribute("blogDate", blogDate);
-		
-		
+			}
+
+			@Override
+			public void connectionLost(Throwable cause) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
 		return "blog-view";
 	}
 
